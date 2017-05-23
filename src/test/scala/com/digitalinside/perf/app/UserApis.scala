@@ -7,11 +7,10 @@ import io.gatling.http.request.builder.HttpRequestBuilder.toActionBuilder
 
 trait UserApis extends Configuration {
 
-  object GetPaymentsAccounts {
-    val request: ScenarioBuilder = scenario("PaymentController - readPaymentsAccounts")
+  object GetUsers {
+    val request: ScenarioBuilder = scenario("UserController - readUsers")
       .exec(http("Get URL")
-        .get("")
-        .header("_guid", "")
+        .get("wiremock/users")
         .check(status.in(200)))
   }
 

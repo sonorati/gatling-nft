@@ -9,7 +9,7 @@ trait Configuration {
   val config: Config = ConfigFactory.load("environments/" + System.getProperty("env", "local")).resolve()
 
 
-  val wiremockHost: String = config.getString("wiremock.url")
+  val wiremockHost: String = config.getString("wiremock.host")
   val wiremockPort: Int = config.getInt("wiremock.port")
 
   val httpConf = http.baseURL(config.getString("public.url")) // Here is the root for all relative URLs
