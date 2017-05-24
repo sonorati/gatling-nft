@@ -6,19 +6,19 @@ import io.gatling.http.config.HttpProtocolBuilder.toHttpProtocol
 
 import scala.concurrent.duration._
 
-class BaseLineReadAccountsSimulation extends Simulation  with UserApis with Configuration {
+class BaseLineReadUsersSimulation extends Simulation  with UserApis with Configuration {
 
 
-  private val scnReadAccounts = scenario("Scenario read payments accounts")
+  private val scnReadUsers = scenario("Scenario read users")
     .forever(
-      exec(GetPaymentsAccounts.request)
+      exec(GetUsers.request)
     )
 
 
   private val scn = scenario("Scenario Performance Test")
     .forever(
       randomSwitch(
-        100d → exec(scnReadAccounts)
+        100d → exec(scnReadUsers)
       )
     )
 
