@@ -1,19 +1,15 @@
 package com.digitalinside.perf.app.simulations
 
-import com.digitalinside.perf.app.wiremock.DigitalInsideWireMock
 import com.digitalinside.perf.app.{Configuration, UserApis}
 import io.gatling.core.Predef._
 import io.gatling.http.config.HttpProtocolBuilder.toHttpProtocol
 
 import scala.concurrent.duration._
 
-class BaseLineWiremockReadAccountsSimulation extends Simulation with DigitalInsideWireMock  with UserApis with Configuration {
+class BaseLineReadUsersSimulation extends Simulation  with UserApis with Configuration {
 
 
-  setUpStubForUrlWithStatusCode("", 200)
-  after()
-
-  private val scnReadAccounts = scenario("Scenario read payments accounts")
+  private val scnReadUsers = scenario("Scenario read users")
     .forever(
       exec(GetUsers.request)
     )
@@ -22,7 +18,7 @@ class BaseLineWiremockReadAccountsSimulation extends Simulation with DigitalInsi
   private val scn = scenario("Scenario Performance Test")
     .forever(
       randomSwitch(
-        100d → exec(scnReadAccounts)
+        100d → exec(scnReadUsers)
       )
     )
 

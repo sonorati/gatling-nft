@@ -9,7 +9,7 @@ trait UserApis extends Configuration {
 
   object GetUsers {
     val request: ScenarioBuilder = scenario("UserController - readUsers")
-      .exec(http("Get URL")
+      .exec(http("Get URL wiremock/users")
         .get("wiremock/users")
         .check(status.in(200)))
   }
