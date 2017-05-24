@@ -1,2 +1,14 @@
 *.class
 *.log
+*~
+target/*
+/*/target/*
+.gradle/*
+scalastyle-output.xml
+.DS_Store
+local.application.conf
+native/*
+build/*
+.idea/
+.gradle/
+target/
