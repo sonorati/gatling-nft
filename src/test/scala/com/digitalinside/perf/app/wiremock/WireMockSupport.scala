@@ -22,10 +22,9 @@ trait WireMockSupport extends Configuration with LazyLogging {
 
     reset()
 
-    val body  = Some(List(TargetEntry(List("fromHere"),List("toHere"), List("withme"))).toJson.prettyPrint)
+    val body = Some(List(TargetEntry(List("fromHere"),List("toHere"), List("withme"))).toJson.prettyPrint)
 
     setUpStubForUrlWithStatusCode("/wiremock/users", 200, body)
-
   }
 
   def setUpStubForUrlWithStatusCode(url: String, statusCode: Int, body: Option[String] = None) = {
@@ -46,7 +45,6 @@ trait WireMockSupport extends Configuration with LazyLogging {
     )
     )
   }
-
 
   def setUpStubFailureWithInternalServerError() = {
     setUpStubForUrlWithStatusCode("/wiremock", 500)
