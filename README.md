@@ -1,10 +1,10 @@
 # this template
 
-This is a simple template with gradle runner, gatling and wiremock config. Its possible to run tests against different environments by loading different config files.  
+This is a simple template with gradle runner and gatling. Its possible to run tests against different environments by loading different config files.
 
 ## Running
 
-This performance testing project is managed using gradle. Most likely you will hook up this command to your CI server and will parameterise it to have different runners. 
+This performance testing project is managed using gradle. Most likely you will hook up this command to your CI server and will parameterize it to have different runners.
 
 The command to run performance tests is:
 `./gradlew loadTest  -Penv=ci -PsimulationClass=$SIMULATION -PrampUp=$RAMPUP -Pusers=$USERS -Pduration=$DURATION -PstartUsers=$START_USERS`
@@ -21,8 +21,5 @@ There are options to choose from when running the performance test as seen in th
 
 ## Simulations
 
-Used simulations are listed below.
-
-* BaseLineReadUsersSimulation - This reads users from a controller if it exist.
-* BaseLineWiremockReadUsersSimulation - This reads users but will mock and instruct the wiremock end point before run. 
+* SendEventToTopic - Will send n valid events to the asb topic.
 
