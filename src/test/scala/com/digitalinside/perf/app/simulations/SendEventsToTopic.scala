@@ -1,17 +1,17 @@
 package com.digitalinside.perf.app.simulations
 
-import com.digitalinside.perf.app.{Configuration, UserApis}
+import com.digitalinside.perf.app.{Configuration, TopicApi}
 import io.gatling.core.Predef._
 import io.gatling.http.config.HttpProtocolBuilder.toHttpProtocol
 
 import scala.concurrent.duration._
 
-class BaseLineReadUsersSimulation extends Simulation  with UserApis with Configuration {
+class SendEventsToTopic extends Simulation  with TopicApi with Configuration {
 
 
-  private val scnReadUsers = scenario("Scenario read users")
+  private val scnReadUsers = scenario("Scenario send events to asb topic")
     .forever(
-      exec(GetUsers.request)
+      exec(SendToTopic.request)
     )
 
 
