@@ -8,14 +8,21 @@ trait Configuration {
 
   val config: Config = ConfigFactory.load("environments/" + System.getProperty("env", "local")).resolve()
 
-  val httpConf = http.baseURL(config.getString("public.url")) // Here is the root for all relative URLs
-    .acceptHeader("application/json") // Here are the common headers
-    .contentTypeHeader("application/json")
-    .acceptEncodingHeader("gzip, deflate,sdch ")
-    .acceptLanguageHeader("en-US,en;q=0.8")
+  val topicUrl = config.getString("topic.url")
+  private val brokerPropertiesName = config.getString("topic.headers.brokerProperties.name")
+  private val brokerPropertiesValue = config.getString("topic.headers.brokerProperties.value")
+  private val contentType = config.getString("topic.headers.contentType")
+  private val sasToken = config.getString("topic.sasToken")
+  val topicName: String = config.getString("topic.name")
 
-  val rampUp: Int = System.getProperty("rampUp", "60").toInt
-  val users: Int = System.getProperty("users", "100").toInt
+
+  val httpConf = http.baseURL(s"$topicUrl/$topicName")
+    .authorizationHeader(sasToken)
+    .contentTypeHeader(contentType)
+    .header(brokerPropertiesName, brokerPropertiesValue)
+
+  val rampUp: Int = System.getProperty("rampUp", "20").toInt
+  val threads: Int = System.getProperty("users", "100").toInt
   val duration: Int = System.getProperty("duration", "2").toInt
   val startUsers: Int = System.getProperty("startUsers", "1").toInt
 }

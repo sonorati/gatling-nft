@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'maven'
 
-group = 'com.asos.perf'
+group = 'com.sos.perf'
 version = '1.0-SNAPSHOT'
 
 description = "performance tests for product core integration"

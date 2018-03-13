@@ -1,29 +1,20 @@
 package com.digitalinside.perf.app.simulations
 
-import com.digitalinside.perf.app.{Configuration, TopicApi}
+import com.digitalinside.perf.app.{Configuration, SendToTopic}
 import io.gatling.core.Predef._
 import io.gatling.http.config.HttpProtocolBuilder.toHttpProtocol
 
 import scala.concurrent.duration._
 
-class SendEventsToTopic extends Simulation  with TopicApi with Configuration {
-
-
-  private val scnReadUsers = scenario("Scenario send events to asb topic")
-    .forever(
-      exec(SendToTopic.request)
-    )
-
+class SendEventsToTopic extends Simulation with Configuration {
 
   private val scn = scenario("Scenario Performance Test")
     .forever(
       randomSwitch(
-        100d → exec(scnReadUsers)
-      )
-    )
+        100d → exec(SendToTopic.request)))
 
   setUp(
-    scn.inject(
-      rampUsers(users) over (rampUp seconds))
+    scn.inject(rampUsers(threads) over (rampUp seconds))
   ).maxDuration(duration minutes).protocols(httpConf)
+
 }
