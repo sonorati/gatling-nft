@@ -9,8 +9,8 @@ trait TopicApi extends Configuration {
 
   object SendToTopic {
     val request: ScenarioBuilder = scenario("Send event to asb")
-      .exec(http("Get URL wiremock/users")
-        .get("wiremock/users")
+      .exec(http("post URL asb/topic")
+        .get("/asb")
         .check(status.in(200)))
   }
 
